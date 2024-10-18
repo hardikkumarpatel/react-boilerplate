@@ -12,23 +12,25 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=1212 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+    "lint": "npx eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "DEBUG=eslint:* npx eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "prepare": "husky || true"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run format"
+      "pre-commit": "lint-staged"
     }
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "prettier --write --ignore-unknown",
+      "npx eslint 'src/**/*.{js,jsx,ts,tsx}'"
     ]
   },
   "browserslist": {
@@ -44,8 +46,17 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "husky": "^9.0.11",
+    "@babel/eslint-parser": "7.25.1",
+    "@commitlint/cli": "19.4.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "@eslint/compat": "^1.1.0",
+    "@eslint/js": "9.9.1",
+    "eslint": "9.9.1",
+    "eslint-plugin-react": "7.35.0",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "globals": "15.9.0",
+    "husky": "9.1.4",
+    "lint-staged": "15.2.8",
     "prettier": "^3.3.2"
   }
 }

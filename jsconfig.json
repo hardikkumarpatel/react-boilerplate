@@ -1,5 +1,11 @@
-{ 
-    "compilerOptions": {
-        "rootDir": ".",
+{
+  "rootDir": ".",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
     }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "build"]
 }
